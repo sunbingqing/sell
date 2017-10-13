@@ -35,11 +35,13 @@
         </li>
       </ul>
     </div>
+    <shop-cart :delivery-price="seller.deliveryPrice" :min-price="minPrice"></shop-cart>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import BScroll from 'better-scroll';
+  import shopCart from 'components/shopCart/shopCart';
 
 const ERR_OK = 0;
 
@@ -113,6 +115,9 @@ export default {
         this.listHeight.push(height);
       }
     }
+  },
+  components: {
+    shopCart
   }
 };
 </script>

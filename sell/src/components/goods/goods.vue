@@ -29,6 +29,9 @@
                 <div class="price">
                   <span class="now">￥{{food.price}}</span><span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
                 </div>
+                <div class="cartcontrol-wrapper">
+                  <cart-control :food="food"></cart-control>
+                </div>
               </div>
             </li>
           </ul>
@@ -42,6 +45,7 @@
 <script type="text/ecmascript-6">
   import BScroll from 'better-scroll';
   import shopCart from 'components/shopCart/shopCart';
+  import cartControl from 'components/cartControl/cartControl';
 
 const ERR_OK = 0;
 
@@ -89,6 +93,7 @@ export default {
       if (!event._constructed) {
         return;
       }
+      // 保证无论是不是自主开发的点击事件都只点击一次
       let foodList = this.$els.foodsWrapper.getElementsByClassName('food-list-hook');
       let el = foodList[index];
       this.foodsScroll.scrollToElement(el, 300);
@@ -98,6 +103,7 @@ export default {
         click: true
       });
       this.foodsScroll = new BScroll(this.$els.foodsWrapper, {
+        click: true,
         probeType: 3
       });
 
@@ -117,7 +123,8 @@ export default {
     }
   },
   components: {
-    shopCart
+    shopCart,
+    cartControl
   }
 };
 </script>
@@ -227,7 +234,10 @@ export default {
                 text-decoration line-through
                 font-size 10px
                 color rgb(147,153,159)
-
+            .cartcontrol-wrapper
+              position absolute
+              right 0
+              bottom 12px
 
 
 </style>
